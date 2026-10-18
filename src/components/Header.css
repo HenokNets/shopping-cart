@@ -1,0 +1,30 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #1F2937;
+    align-items: center;
+    color: white;
+    padding: 12px 36px;
+}
+
+
+.nav-links {
+    display: flex;
+    justify-content: space-around;
+    gap: 24px;
+    padding-right: 24px;
+}
+
+.nav-links a {
+    color: rgb(167, 163, 163);
+    font-size: 18px;
+}
+
+.nav-links > img {
+    filter: invert(1);
+}
+
+.shop-name > p {
+    font-size: 32px;
+    font-weight: 700;
+}
