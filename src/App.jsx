@@ -5,6 +5,7 @@ import Shop from "./pages/Shop";
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import Cart from "./pages/Cart";
+import Footer from "./components/Footer";
 
 function App() {
   const [shopData, setShopData] = useState([]);
@@ -29,6 +30,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
+      <Footer />
     </>
   );
 }
