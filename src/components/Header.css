@@ -1,30 +1,48 @@
 header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
-    background-color: #1F2937;
     align-items: center;
+    background-color: rgba(17, 24, 39, 0.94);
+    backdrop-filter: blur(8px);
     color: white;
-    padding: 12px 36px;
+    padding: 14px 48px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
 }
-
 
 .nav-links {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     gap: 24px;
-    padding-right: 24px;
+    padding-right: 8px;
 }
 
 .nav-links a {
-    color: rgb(167, 163, 163);
-    font-size: 18px;
+    color: #d1d5db;
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #ffffff;
 }
 
 .nav-links > img {
+    width: 26px;
+    height: 26px;
     filter: invert(1);
+    opacity: 0.9;
 }
 
 .shop-name > p {
-    font-size: 32px;
+    margin: 0;
+    font-size: 2rem;
     font-weight: 700;
+    letter-spacing: -0.04em;
 }
