@@ -1,23 +1,11 @@
 import "./Shop.css";
-import { useState } from "react";
-
-export default function Shop({ shopData }) {
-  const [quantities, setQuantities] = useState({});
-
-  function handleInputChange(id, value) {
-    const quantity = Math.max(0, Number(value) || 0);
-
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: quantity,
-    }));
-  }
-
-  function handleButtonClick(id, amount) {
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: Math.max(0, (prev[id] ?? 0) + amount),
-    }));
+export default function Shop({ shopData, quantities, setCart, handleInputChange, handleButtonClick }) {
+  
+  function handleAddToCart(id, title, price, quantity, src ) {
+    setCart((prev) => ({
+        ...prev, 
+        [id]: {id, title, price, quantity, src}
+    }))
   }
 
   return (
@@ -59,12 +47,7 @@ export default function Shop({ shopData }) {
             </div>
 
             <button
-              onClick={() =>
-                console.log("Added to cart:", {
-                  product: data.title,
-                  quantity,
-                })
-              }
+                onClick={() => handleAddToCart(data.id, data.title, data.price, quantity, data.image)}
             >
               Add to cart
             </button>

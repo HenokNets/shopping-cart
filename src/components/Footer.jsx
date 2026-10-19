@@ -1,5 +1,6 @@
 import Twitter from "../assets/twitter.png";
 import "./Footer.css";
+import { Link } from "react-router";
 
 export default function Footer() {
   return (
@@ -22,9 +23,9 @@ export default function Footer() {
       </div>
 
       <nav className="footer-nav" aria-label="Footer navigation">
-        <a href="/">Home</a>
-        <a href="/shop">Shop</a>
-        <a href="/cart">Cart</a>
+        <Link to="/">Home</Link>
+        <Link to="/shop">Shop</Link>
+        <Link to="/cart">Cart</Link>
       </nav>
     </footer>
   );

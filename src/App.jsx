@@ -9,28 +9,66 @@ import Footer from "./components/Footer";
 
 function App() {
   const [shopData, setShopData] = useState([]);
+  const [quantities, setQuantities] = useState({});
+  const [carts, setCart] = useState({});
   useEffect(() => {
     async function fetchStoreData() {
       const response = await fetch("https://fakestoreapi.com/products");
       const data = await response.json();
       setShopData(data);
-      console.log(data);
     }
 
     fetchStoreData();
   }, []);
 
+  function handleInputChange(id, value) {
+    const quantity = Math.max(0, Number(value) || 0);
+
+    setQuantities((prev) => ({
+      ...prev,
+      [id]: quantity,
+    }));
+  }
+
+  function handleButtonClick(id, amount) {
+    setQuantities((prev) => ({
+      ...prev,
+      [id]: Math.max(0, (prev[id] ?? 0) + amount),
+    }));
+  }
+
   return (
     <>
-      <Header />
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/shop" element={<Shop shopData={shopData} />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/shop"
+            element={
+              <Shop
+                shopData={shopData}
+                quantities={quantities}
+                setCart={setCart}
+                handleInputChange={handleInputChange}
+                handleButtonClick={handleButtonClick}
+              />
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <Cart
+                carts={carts}
+                handleInputChange={handleInputChange}
+                handleButtonClick={handleButtonClick}
+                quantities={quantities}
+              />
+            }
+          />
         </Routes>
+        <Footer />
       </BrowserRouter>
-      <Footer />
     </>
   );
 }
