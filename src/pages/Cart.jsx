@@ -1,30 +1,64 @@
-import { Fragment } from "react";
+import "./Cart.css";
 
-export default function Cart({ carts, handleInputChange, handleButtonClick, quantities, handleDeleteButton }) {
-  const cartArray = Object.values(carts);
-  console.log(cartArray)
+export default function Cart({
+  carts,
+  handleInputChange,
+  handleButtonClick,
+  quantities,
+  handleDeleteButton,
+}) {
+  const cartArray = Object.values(carts || {});
+
   return (
-    <>
-      <p>Your Cart</p>
-      <p>Review your items and make change as needed.</p>
+    <main className="cart-page">
+      <header className="cart-header">
+        <p className="cart-kicker">Your Cart</p>
+        <p className="cart-subtitle">Review your items and make changes as needed.</p>
+      </header>
 
-      {cartArray.map((cart) => {
-        const quantity = quantities[cart.id] ?? 0;
-        return (
-          <Fragment key={cart.title}>
-            <img src={cart.src}></img>
-            <p>{cart.title}</p>
-            <p>{cart.price}</p>
-            <div>
-              <button onClick={() => handleButtonClick(cart.id, -1)}>-</button>
-              <input value={quantity} onChange={(event) => handleInputChange(cart.id, event.target.value)}></input>
-              <button onClick={() => handleButtonClick(cart.id, 1)}>+</button>
-            </div>
-            <p>{quantity * cart.price}</p>
-            <button onClick={() => handleDeleteButton(cart.id)}>Delete</button>
-          </Fragment>
-        );
-      })}
-    </>
+      <section className="cart-list">
+        {cartArray.map((cart) => {
+          const quantity = quantities[cart.id] ?? 0;
+          const itemTotal = Number((quantity * cart.price).toFixed(2));
+
+          return (
+            <article key={cart.title} className="cart-item">
+              <img className="cart-image" src={cart.src} alt={cart.title} />
+
+              <div className="cart-details">
+                <p className="cart-title">{cart.title}</p>
+                <p className="cart-price">${cart.price}</p>
+              </div>
+
+              <div className="cart-actions">
+                <div className="quantity-controls">
+                  <button type="button" onClick={() => handleButtonClick(cart.id, -1)}>
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    value={quantity}
+                    onChange={(event) => handleInputChange(cart.id, event.target.value)}
+                  />
+                  <button type="button" onClick={() => handleButtonClick(cart.id, 1)}>
+                    +
+                  </button>
+                </div>
+
+                <p className="cart-total">${itemTotal}</p>
+              </div>
+
+              <button
+                type="button"
+                className="delete-button"
+                onClick={() => handleDeleteButton(cart.id)}
+              >
+                Delete
+              </button>
+            </article>
+          );
+        })}
+      </section>
+    </main>
   );
 }
