@@ -20,7 +20,7 @@ export default function Cart({ carts, handleInputChange, handleButtonClick, quan
               <input value={quantity} onChange={(event) => handleInputChange(cart.id, event.target.value)}></input>
               <button onClick={() => handleButtonClick(cart.id, 1)}>+</button>
             </div>
-            <p>{cart.quantity * cart.price}</p>
+            <p>{quantity * cart.price}</p>
             <button>Delete</button>
           </Fragment>
         );
