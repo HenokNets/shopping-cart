@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-export default function Cart({ carts, handleInputChange, handleButtonClick, quantities }) {
+export default function Cart({ carts, handleInputChange, handleButtonClick, quantities, handleDeleteButton }) {
   const cartArray = Object.values(carts);
   console.log(cartArray)
   return (
@@ -21,7 +21,7 @@ export default function Cart({ carts, handleInputChange, handleButtonClick, quan
               <button onClick={() => handleButtonClick(cart.id, 1)}>+</button>
             </div>
             <p>{quantity * cart.price}</p>
-            <button>Delete</button>
+            <button onClick={() => handleDeleteButton(cart.id)}>Delete</button>
           </Fragment>
         );
       })}

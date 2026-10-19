@@ -20,7 +20,7 @@ function App() {
 
     fetchStoreData();
   }, []);
-
+  console.log(carts)
   function handleInputChange(id, value) {
     const quantity = Math.max(0, Number(value) || 0);
 
@@ -35,6 +35,15 @@ function App() {
       ...prev,
       [id]: Math.max(0, (prev[id] ?? 0) + amount),
     }));
+  }
+
+  function handleDeleteButton(id) {
+    setCart((prev) => {
+      const next = {...prev};
+      delete next[id];
+      return next
+
+    })
   }
 
   return (
@@ -63,6 +72,7 @@ function App() {
                 handleInputChange={handleInputChange}
                 handleButtonClick={handleButtonClick}
                 quantities={quantities}
+                handleDeleteButton={handleDeleteButton}
               />
             }
           />
