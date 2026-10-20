@@ -2,10 +2,13 @@ import "./Shop.css";
 export default function Shop({ shopData, quantities, setCart, handleInputChange, handleButtonClick }) {
   
   function handleAddToCart(id, title, price, quantity, src ) {
-    setCart((prev) => ({
-        ...prev, 
-        [id]: {id, title, price, quantity, src}
-    }))
+    if (quantity !== 0) {
+        setCart((prev) => ({
+                ...prev, 
+                [id]: {id, title, price, quantity, src}
+            }))
+    }
+    
   }
 
   return (
@@ -27,7 +30,7 @@ export default function Shop({ shopData, quantities, setCart, handleInputChange,
               <input
                 type="number"
                 min="0"
-                value={quantity}
+                value={quantity === 0 ? "" : quantity}
                 onChange={(event) =>
                   handleInputChange(data.id, event.target.value)
                 }

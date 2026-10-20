@@ -20,10 +20,16 @@ function App() {
 
     fetchStoreData();
   }, []);
-  console.log(carts)
+  
   function handleInputChange(id, value) {
-    const quantity = Math.max(0, Number(value) || 0);
-
+    const quantity = Math.max(0, Number(value));
+    if (value === "") {
+      setQuantities((prev) => ({
+        ...prev, 
+        [id]: 0
+      }))
+      return;
+    }
     setQuantities((prev) => ({
       ...prev,
       [id]: quantity,
