@@ -1,14 +1,24 @@
 import "./Shop.css";
-export default function Shop({ shopData, quantities, setCart, handleInputChange, handleButtonClick }) {
-  
-  function handleAddToCart(id, title, price, quantity, src ) {
-    if (quantity !== 0) {
-        setCart((prev) => ({
-                ...prev, 
-                [id]: {id, title, price, quantity, src}
-            }))
-    }
-    
+export default function Shop({
+  shopData,
+  quantities,
+  setCart,
+  handleInputChange,
+  handleButtonClick,
+}) {
+  function handleAddToCart(id, title, price, quantity, src) {
+    if (quantity <= 0) return;
+
+    setCart((prev) => ({
+      ...prev,
+      [id]: {
+        id,
+        title,
+        price,
+        quantity,
+        src,
+      },
+    }));
   }
 
   return (
@@ -36,21 +46,21 @@ export default function Shop({ shopData, quantities, setCart, handleInputChange,
                 }
               />
 
-              <button
-                onClick={() => handleButtonClick(data.id, 1)}
-              >
-                +
-              </button>
+              <button onClick={() => handleButtonClick(data.id, 1)}>+</button>
 
-              <button
-                onClick={() => handleButtonClick(data.id, -1)}
-              >
-                -
-              </button>
+              <button onClick={() => handleButtonClick(data.id, -1)}>-</button>
             </div>
 
             <button
-                onClick={() => handleAddToCart(data.id, data.title, data.price, quantity, data.image)}
+              onClick={() =>
+                handleAddToCart(
+                  data.id,
+                  data.title,
+                  data.price,
+                  quantity,
+                  data.image,
+                )
+              }
             >
               Add to cart
             </button>

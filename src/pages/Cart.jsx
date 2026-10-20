@@ -13,7 +13,9 @@ export default function Cart({
     <main className="cart-page">
       <header className="cart-header">
         <p className="cart-kicker">Your Cart</p>
-        <p className="cart-subtitle">Review your items and make changes as needed.</p>
+        <p className="cart-subtitle">
+          Review your items and make changes as needed.
+        </p>
       </header>
 
       <section className="cart-list">
@@ -32,15 +34,23 @@ export default function Cart({
 
               <div className="cart-actions">
                 <div className="quantity-controls">
-                  <button type="button" onClick={() => handleButtonClick(cart.id, -1)}>
+                  <button
+                    type="button"
+                    onClick={() => handleButtonClick(cart.id, -1)}
+                  >
                     -
                   </button>
                   <input
                     type="number"
                     value={quantity}
-                    onChange={(event) => handleInputChange(cart.id, event.target.value)}
+                    onChange={(event) =>
+                      handleInputChange(cart.id, event.target.value)
+                    }
                   />
-                  <button type="button" onClick={() => handleButtonClick(cart.id, 1)}>
+                  <button
+                    type="button"
+                    onClick={() => handleButtonClick(cart.id, 1)}
+                  >
                     +
                   </button>
                 </div>

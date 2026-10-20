@@ -23,44 +23,64 @@ function App() {
 
   function handleInputChange(id, value) {
     const quantity = Math.max(0, Number(value));
-    if (value === "") {
-      setQuantities((prev) => ({
-        ...prev, 
-        [id]: 0
-      }))
-      return;
-    }
+
     setQuantities((prev) => ({
       ...prev,
       [id]: quantity,
     }));
+
+    setCart((prev) => {
+      if (!prev[id]) return prev;
+
+      return {
+        ...prev,
+        [id]: {
+          ...prev[id],
+          quantity,
+        },
+      };
+    });
   }
 
   function handleButtonClick(id, amount) {
+    const quantity = Math.max(0, (quantities[id] ?? 0) + amount);
+
     setQuantities((prev) => ({
       ...prev,
-      [id]: Math.max(0, (prev[id] ?? 0) + amount),
+      [id]: quantity,
     }));
+
+    setCart((prev) => {
+      if (!prev[id]) return prev;
+
+      return {
+        ...prev,
+        [id]: {
+          ...prev[id],
+          quantity,
+        },
+      };
+    });
   }
 
   function handleDeleteButton(id) {
     setCart((prev) => {
-      const next = {...prev};
-      delete next[id];
-      return next
-    })
-
-    setQuantities((prev) => {
-      const next = {...prev};
+      const next = { ...prev };
       delete next[id];
       return next;
-    })
+    });
+
+    setQuantities((prev) => {
+      const next = { ...prev };
+      delete next[id];
+      return next;
+    });
   }
 
   return (
     <>
       <BrowserRouter>
-        <Header carts={carts}/>
+        <Header carts={carts} />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
