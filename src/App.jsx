@@ -49,7 +49,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
+        <Header carts={carts}/>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
