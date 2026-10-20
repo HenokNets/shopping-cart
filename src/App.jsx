@@ -20,7 +20,7 @@ function App() {
 
     fetchStoreData();
   }, []);
-  
+
   function handleInputChange(id, value) {
     const quantity = Math.max(0, Number(value));
     if (value === "") {
@@ -48,7 +48,12 @@ function App() {
       const next = {...prev};
       delete next[id];
       return next
+    })
 
+    setQuantities((prev) => {
+      const next = {...prev};
+      delete next[id];
+      return next;
     })
   }
 
